@@ -1,0 +1,3 @@
+# Keep evidence files byte-for-byte as committed so the SHA-256 hashes in
+# 6_Evidence_Files/EVIDENCE_REGISTER.csv still match after checkout on any OS.
+6_Evidence_Files/** -text
