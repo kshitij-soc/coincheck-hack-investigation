@@ -1,6 +1,6 @@
 # Reproducibility notes
 
-**Project:** Coincheck NEM theft investigation (First Quadrant Labs / BIA)
+**Project:** Coincheck NEM theft investigation (independent research project)
 
 ## What you need
 Python 3.10 or newer with `requests`, `pandas` and `matplotlib`.
@@ -12,7 +12,8 @@ Python 3.10 or newer with `requests`, `pandas` and `matplotlib`.
    - A to B: 11 transfers, 526,300,010 XEM (first 8: 523,000,010; last 3: 3,300,000)
    - B later outflows (not traced): 37 transfers, 3,300,334 XEM
    - B onward, first sweep: 8 transfers, 523,000,000 XEM
-4. **Integrity.** Compare each file's SHA-256 hash with `EVIDENCE_REGISTER.csv` (`sha256sum <file>` on Linux or macOS, `Get-FileHash <file>` in Windows PowerShell).
+4. **Second-node cross-check (optional, not yet run).** `python scripts/crosscheck_second_node.py --node http://nis1.p-runner.net:7890` compares the 11 A to B and 8 onward transfers against another NIS1 node and writes `data/crosscheck_<host>.csv`. Offline mode: `--raw-a <file> --raw-b <file>` compares against raw JSON collected elsewhere.
+5. **Integrity.** Compare each file's SHA-256 hash with `EVIDENCE_REGISTER.csv` (`sha256sum <file>` on Linux or macOS, `Get-FileHash <file>` in Windows PowerShell).
 
 ## Method notes
 - NEM timestamps count seconds from 2015-03-29 00:06:25 UTC. The first collector script used 00:00:00, so its times were 6 min 25 s early. `process_raw.py` uses the corrected epoch. Times in the report are in JST (UTC+9); the transaction tables also show UTC.
